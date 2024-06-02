@@ -74,30 +74,44 @@ function displayCartItems(items) {
     itemElement.className = "cart-item";
     itemElement.setAttribute("data-item-id", item.id); // Add item ID as a data attribute
     itemElement.innerHTML = `
-        <div class="cart-item-image">
-          <img src="${item.image}" alt="${item.product_title}">
+
+      <div class='cart-item-inner'> 
+      
+      <div class="cart-item-image">
+        <img src="${item.image}" alt="${item.product_title}">
+      </div>
+
+
+      <div class='dflex-row justify-content-sb'> 
+      
+      <div class="cart-item-details">
+        <div class="cart-item-title">
+          <a href="${item.url}">
+            <h3 class="underline-animation fs-16">${item.product_title}</h3>
+          </a>
         </div>
-        <div class="cart-item-details">
-          <div class="cart-item-title">
-            <a href="${item.url}">
-              <h3 class="underline-animation fs-16">${item.product_title}</h3>
-            </a>
-          </div>
-          <div class="cart-item-price text-neutral-100-7">$${priceWithDecimal}</div>
-          ${
-            !item.product_has_only_default_variant
-              ? `<div class="cart-item-variant fs-14 text-neutral-100-7">${item.variant_title}</div>`
-              : ""
-          }
+        <div class="cart-item-price text-neutral-100-7 fs-16">$${priceWithDecimal}</div>
+        ${
+          !item.product_has_only_default_variant
+            ? `<div class="cart-item-variant fs-14 text-neutral-100-7">${item.variant_title}</div>`
+            : ""
+        }
+      </div>
+      <div class="quantity-remove">
+        <div class="quantity-box">
+          <input type="number" class="quantity-input" value="${
+            item.quantity
+          }" min="1">
         </div>
-        <div class="quantity-remove">
-          <div class="quantity-box">
-            <input type="number" class="quantity-input" value="${
-              item.quantity
-            }" min="1">
-          </div>
-          <button class="remove-item-btn">Remove</button>
-        </div>
+        <h6 class="remove-item-btn underline-animation-reverse fs-12 text-neutral-100-7 fw-regular">Remove</h6>
+      </div>
+      
+      </div>
+      
+      
+
+
+      <div>
       `;
     cartItemsContainer.appendChild(itemElement);
   });

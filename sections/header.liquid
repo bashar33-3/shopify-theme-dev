@@ -142,6 +142,7 @@
 
     border-top: 1px solid rgba(255, 255, 255, 0.5);
 
+
   }
 
   /* Scrollbar Track */
@@ -175,15 +176,19 @@
     flex-direction: column;
   }
 
+
+
   .not-empty-cart .cart-item{
-    display: grid;
-    padding-top: 24px;
-    gap: 20px;
-    grid-template-columns: 0.5fr 2fr 1fr;
-    max-height: 200px; /* Adjust based on the typical height of your cart items */
+    max-height: 200px; 
     transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
     overflow: hidden;
-    opacity: 1;
+  }
+
+  .cart-item-inner{
+    display: grid;
+    padding-top: 24px;
+    gap: 0 20px;
+    grid-template-columns: auto 2fr;
   }
 
   .cart-item.collapsing {
@@ -227,6 +232,46 @@
     padding-top: 20px;
   }
 
+  .add-order-note{
+    cursor: pointer;
+  }
+
+  .quantity-remove{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .quantity-input{
+    background: transparent;
+    color: var(--clr-neutral-100);
+    width: 48px;
+    padding-block: 8px;
+    
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  input[type="number"]:focus{
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    outline: none;
+  }
+
+
+
 
 
 
@@ -241,7 +286,7 @@
     height: 32px;
   }
 
-  .not-empty-cart .cart-item{
+  .not-empty-cart .cart-item-inner{
     padding-top: 16px;
 
   }
@@ -263,8 +308,47 @@
     font-size: 12px;
   }
 
+  .not-empty-cart > div:nth-child(1),
+    .not-empty-cart> div:nth-child(2){
+      padding: 20px;
+    }
+
+    .cartdrawer-cta{
+      flex-direction: column;
+    }
+    .cartdrawer-bottom button{
+      width: 100%;
+    }
+
+    .not-empty-cart > div:nth-child(1){
+    height: 70vh;
+  }
+
+  .not-empty-cart .cart-item-inner > div:nth-child(2){
+    flex-direction: column;
+    gap: 5px;
+  }
+  .quantity-remove{
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .quantity-input{
+    padding-block: 4px;
+    width: 44px;
+  }
+
   
   }
+
+  @media (max-width:370px){
+    
+
+
+
+  }
+
+  
 </style>
 
 
@@ -397,7 +481,7 @@
           </div>
 
           <h5 class="fs-16 text-neutral-100-7 fw-regular">Taxes and shipping calculated at checkout</h5>
-          <h6 class="underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">Add order note</h6>
+          <h6 class="add-order-note underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">Add order note</h6>
 
           <div class="cartdrawer-cta dflex-row justify-content-sb gap-10">
             <a href="/cart"><button class="btn-secondary">View Cart</button></a>
