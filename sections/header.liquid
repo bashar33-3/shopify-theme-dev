@@ -1,0 +1,528 @@
+<style>
+
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 200;
+    width: 0;
+    opacity: 0;
+    transition: width 0s, opacity 0.2s ease;
+  }
+
+  .cart-content {
+    width: 100%;
+    max-width: 0;
+    background-color: #272727;
+    border-radius: 17px;
+    overflow: hidden;
+    transition: max-width 0.4s cubic-bezier(0.29,-0.06, 1, 0.08);
+    z-index: 999;
+    height: 97vh;
+    transform: translateY(-98.5vh);
+
+  }
+
+  .cart-content-wrapper{
+    height: 97vh;
+    position: fixed;
+    padding-inline: var(--container-padding-inline-phone);
+    /* display: flex; */
+    z-index: 999;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .cart-overlay.closing {
+    transition: width 0s 0.6s, opacity 0.3s 0.8s ease;
+  }
+
+  .cart-overlay.visible {
+    width: 100%;
+    opacity: 1;
+  }
+
+  .cart-products{
+    opacity: 0;
+  }
+
+  .cart-products.closing{
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+  
+  .cart-products.visible{
+    opacity: 1;
+    transition: opacity 0.3s 0.5s ease;
+  }
+  
+  .cart-content.visible {
+    max-width: 648px;
+  }
+
+  .cart-products.empty {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+  .cart-products.not-empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  .cart-content .icon-close {
+    stroke: var(--clr-neutral-100);
+    cursor: pointer;
+  }
+
+  .empty-cart .cart-close{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
+  .cart-products .icon-cart{
+    width: 48px;
+    height: 48px;
+  }
+
+  .cart-products .header-cart-count{
+    left: 2em;
+    top: -0.6em;
+  }
+
+  .cart-products .count-bubble{
+    width: 28px;
+    height: 28px;
+  }
+
+  .cart-products .empty-cart button{
+    padding: 17.2px 40px;
+    font-size: var(--fs-200);
+  }
+
+  .empty-cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .not-empty-cart{
+    height: 100%;
+  }
+  
+  .not-empty-cart > div:nth-child(1){
+    padding: 34px 40px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    height: 72vh;
+  }
+
+  .not-empty-cart > div:nth-child(2){
+    padding: 34px 40px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+  }
+
+  /* Scrollbar Track */
+.not-empty-cart::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the background color of the scrollbar track */
+}
+
+/* Scrollbar Thumb */
+.not-empty-cart::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* Set the color of the scrollbar thumb */
+  border-radius: 10px; /* Set the border radius of the scrollbar thumb */
+}
+
+/* Thin Scrollbar */
+.not-empty-cart::-webkit-scrollbar {
+  width: 5px; /* Set the width of the scrollbar */
+}
+
+/* Hide scrollbar when not interacting */
+.not-empty-cart::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.3); /* Set the color of the scrollbar thumb when active (being dragged) */
+}
+
+
+  .not-empty-cart .header-cart-count{
+    position: static;
+  }
+
+  .cart-items-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .not-empty-cart .cart-item{
+    display: grid;
+    padding-top: 24px;
+    gap: 20px;
+    grid-template-columns: 0.5fr 2fr 1fr;
+    max-height: 200px; /* Adjust based on the typical height of your cart items */
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+    overflow: hidden;
+    opacity: 1;
+  }
+
+  .cart-item.collapsing {
+    max-height: 0;
+    opacity: 0;
+  }
+
+
+
+  .cart-item-image{
+    width: 96px;
+    height: 96px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .cartdrawer-header{  }
+
+  .cart-item-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .cartdrawer-bottom{
+    /* height: 23%; */
+  }
+
+  .cartdrawer-bottom button{
+    padding: 17px 40px;
+    width: 50%;
+    font-size: var(--fs-200);
+  }
+
+  .cartdrawer-total{
+    letter-spacing: 1.2px;
+  }
+
+  .cartdrawer-cta{
+    padding-top: 20px;
+  }
+
+
+
+
+
+  @media (max-width:700px){
+    .cart-content {
+    transition: max-width 0.4s linear;
+  }
+   
+    .cart-products .icon-cart{
+    width: 32px;
+    height: 32px;
+  }
+
+  .not-empty-cart .cart-item{
+    padding-top: 16px;
+
+  }
+
+  .cart-item-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+
+  .cartdrawer-total{
+    font-size: 18px !important;
+  }
+
+  .cartdrawer-bottom h5,
+  .cartdrawer-bottom h6{
+    font-size: 12px;
+  }
+
+  
+  }
+</style>
+
+
+<header class="header-section align-center pad-x">
+
+  <div class="header-logo-wrapper">
+    <a href="/">
+      <img class="header-logo" src="{{settings.logo_image |  img_url: 'medium'}}" alt="Petriotics Logo">
+    </a>
+  </div>
+
+
+  <ul role="list" class="header-menu dflex-row fw-bold flex-wrap justify-content-center">
+
+
+    {% for link in linklists.main-menu.links -%}
+    <li class="menu-item">
+      <div class="dflex-row justify-content-sb gap-10 align-center">
+        {{ link.title | link_to: link.url }}
+        {% if link.title == 'Fitness & Weight Lifting' or link.title == 'Yoga Essentials' or link.title == 'Mats' %}
+        <span class="chevron" onclick="toggleSubMenu(this)">
+
+          {% render 'chevron-down-svg' %}
+        </span>
+
+      </div>
+      <ul class="sub-menu fs-16 fw-regular">
+        <div class="sub-menu-dropdown">
+
+          {% for childlink in link.links %}
+          <li>{{ childlink.title | link_to: childlink.url }}</li>
+          {% endfor %}
+
+        </div>
+      </ul>
+    </li>
+    {% endif %}
+    {%- endfor %}
+
+  </ul>
+
+
+
+  <div class="text-neutral-100 dflex-row gap-24">
+    <div class="price-picker custom-select dflex-row align-center gap-10">
+      <div data-value="USD" class="dflex-row align-center justify-content-center gap-10 fw-bold fs-14"><span
+          class="country-flags country-flag-LB"></span> USD $</div>
+      <span class="chevron" onclick="toggleSubMenu(this)">
+
+        {% render 'chevron-down-svg' %}
+      </span>
+
+    </div>
+
+    {% render 'search-svg' %}
+
+    <div class="relative" onclick="showCartOverlay()">
+      <span>{% render 'cart-svg' %}</span>
+      <div class="header-cart-count">
+          <cart-count class="count-bubble">
+              <h1>{{ cart.item_count }}</h1>
+          </cart-count>
+      </div>
+    </div>
+  </div>
+
+
+</header>
+
+
+<div id="cart-overlay" class="cart-overlay">
+</div>
+
+<div class="cart-content-wrapper">
+
+  <div id="cart-content" class="cart-content">
+    <div id="cart-products" class="cart-products">
+
+      
+      
+      <div id="empty-cart" class="empty-cart" style="display: none;">
+        <div class="cart-close">
+          <span  onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
+        </div>
+        <div class="relative" style="width: fit-content;">
+          <span style="display: block; width: fit-content; position: relative;">{% render 'cart-svg' %}</span>
+          <div class="header-cart-count">
+              <cart-count class="count-bubble">
+                  <h1>{{ cart.item_count }}</h1>
+              </cart-count>
+          </div>
+        </div>
+
+        <h2 class="fs-24 ff-secondary fw-regular">Your Cart is empty</h2>
+
+        <a href="/products"><button class="btn-primary">Continue shopping</button></a>
+
+      </div>
+
+
+      <div id="not-empty-cart" class="not-empty-cart" style="display: none;">
+        
+
+        <div>
+          <div class="cartdrawer-header dflex-row justify-content-sb align-center">
+            <div class="dflex-row gap-10 align-center">
+              <h3 class="fs-24 ff-secondary">Cart</h3>
+              <div class="header-cart-count">
+                <cart-count class="count-bubble">
+                    <h1>{{ cart.item_count }}</h1>
+                </cart-count>
+              </div>
+            </div>
+  
+            <div class="cart-close">
+              <span class="dflex-row justify-content-center align-center"  onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
+            </div>
+  
+          </div>
+  
+          <div id="cart-items-container" class="cart-items-container"></div>
+
+        </div>
+
+
+        <div class="cartdrawer-bottom dflex-col gap-5">
+          <div class="cartdrawer-total dflex-row justify-content-sb align-center ff-secondary fw-regular fs-24">
+            <h2 class="fw-regular">Total</h2>
+            <h3 id="cart-total" class="cart-total fw-regular">$73</h3>
+          </div>
+
+          <h5 class="fs-16 text-neutral-100-7 fw-regular">Taxes and shipping calculated at checkout</h5>
+          <h6 class="underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">Add order note</h6>
+
+          <div class="cartdrawer-cta dflex-row justify-content-sb gap-10">
+            <a href="/cart"><button class="btn-secondary">View Cart</button></a>
+            <a href="/checkout"><button class="btn-primary dflex-row align-center justify-content-center gap-10"><span>{% render 'checkout-icon' %}</span>  Checkout</button></a>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script>
+  function showCartOverlay() {
+    // Show the cart overlay
+    document.getElementById('cart-overlay').classList.remove('closing');
+    document.getElementById('cart-overlay').classList.add('visible');
+    document.getElementById('cart-content').classList.add('visible');
+    document.getElementById('cart-products').classList.add('visible');
+  }
+
+  function closeCartOverlay() {
+    // Hide the cart overlay
+    document.getElementById('cart-products').classList.add('closing');
+    document.getElementById('cart-products').classList.remove('visible');
+    document.getElementById('cart-overlay').classList.remove('visible');
+    document.getElementById('cart-overlay').classList.add('closing');
+    document.getElementById('cart-content').classList.remove('visible');
+  }
+</script>
+
+
+
+
+
+
+
+
+<script>
+  // Function to close all open submenus
+  function closeAllSubMenus() {
+    const visibleSubMenus = document.querySelectorAll('.sub-menu.visible');
+    visibleSubMenus.forEach(subMenu => {
+      subMenu.classList.remove('visible');
+    });
+  }
+
+  // Function to toggle submenu visibility
+  function toggleSubMenu(menuItem) {
+    // Find the submenu associated with the menu item
+    const subMenu = menuItem.querySelector('.sub-menu');
+
+    // If the submenu is already visible, close it; otherwise, open it
+    if (subMenu.classList.contains('visible')) {
+      subMenu.classList.remove('visible');
+    } else {
+      // Close all open submenus first
+      closeAllSubMenus();
+      // Open the submenu associated with the clicked menu item
+      subMenu.classList.add('visible');
+    }
+  }
+
+  // Get all menu items within the header-menu
+  const menuItems = document.querySelectorAll('.header-menu .menu-item');
+
+  // Loop through each menu item
+  menuItems.forEach(menuItem => {
+    // Add click event listener to toggle submenu visibility
+    menuItem.addEventListener('click', function (event) {
+      // Toggle submenu visibility
+      toggleSubMenu(this);
+    });
+  });
+
+  // Add click event listener to document
+  document.addEventListener('click', function (event) {
+    // Check if the clicked element is not within the header-menu or submenu
+    if (!event.target.closest('.header-menu') && !event.target.closest('.sub-menu')) {
+      // Close all open submenus
+      closeAllSubMenus();
+    }
+  });
+</script>
+
+
+<!-- cart count items change -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get the cart count element
+    const cartCountElement = document.querySelector('.header-cart-count h1');
+
+    // Get the item count from the element
+    const itemCount = parseInt(cartCountElement.textContent);
+
+    // Hide the bubble if the item count is 0
+    if (itemCount === 0) {
+      cartCountElement.closest('.header-cart-count').style.display = 'none';
+    }
+  });
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Find the header section
+    const headerSection = document.querySelector('.header-section');
+
+    if (headerSection) {
+        // Find the parent container with the ID that starts with 'shopify-section-'
+        const parentContainer = headerSection.closest('[id^="shopify-section-"]');
+
+        if (parentContainer) {
+            // Apply the styles
+            parentContainer.style.position = 'sticky';
+            parentContainer.style.top = '0';
+            parentContainer.style.zIndex = '100';
+        }
+    }
+});
+
+</script>

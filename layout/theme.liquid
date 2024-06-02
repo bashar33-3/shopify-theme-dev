@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>{{ page_title }}</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  {{ content_for_header }}
+  {{ 'application.css' | asset_url | stylesheet_tag }}
+  {{ 'application.js' | asset_url | script_tag }}
+  {{ 'height-fix.js' | asset_url | script_tag }}
+  {{ 'add-to-cart.js' | asset_url | script_tag }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+</head>
+
+<body>
+
+  {% sections 'header-group' %}
+
+  {% if shop.customer_accounts_enabled %}
+  {% if customer %}
+  <a href="/account">account</a>
+  {{ 'log out' | customer_logout_link }}
+  {% else %}
+  {{ 'log in ' | customer_login_link }}
+  {{ 'register' | customer_register_link }}
+  {% endif %}
+  {% endif %}
+
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+</body>
+
+</html>

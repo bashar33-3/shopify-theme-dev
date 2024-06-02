@@ -1,0 +1,77 @@
+<style>
+
+.product-card:hover .quick-add-button {
+  opacity: 1;
+}
+
+.product-card .quick-add-button{
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  opacity:0;
+  transition: all 0.3s ease;
+}
+
+.quick-add-button{
+  background-color: #6793db;
+  color: var(--clr-neutral-100);
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quick-add-button:hover{
+    background-color: transparent;
+    color: #6793db;
+    box-shadow: 0 0 0 2px #6793db;
+}
+
+.quick-add-button-touch{
+    overflow: hidden;
+    background-color: var(--clr-neutral-900);
+    border-radius: 50%;
+    padding: 12px;
+    opacity: 1 !important;
+    display: none;
+}
+
+.quick-add-button-touch:hover{
+    background-color: var(--clr-neutral-900);
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: none;
+}
+
+
+.quick-add-cart .icon-cart{
+    width: 16px;
+    height:14px;
+    stroke: var(--clr-neutral-100);
+}
+
+
+@media (pointer: coarse){
+    .quick-add-button-touch{
+        display: block;
+}
+    .quick-add-button-mouse{
+        display: none;
+    }
+
+
+}
+
+
+</style>
+
+<form class="quick-add-form" action="/cart/add" method="post">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <button type="submit" class="quick-add-button quick-add-button-mouse">+ Quick add</button>
+    <button type="submit" class="quick-add-button quick-add-button-touch"> <span class="quick-add-cart dflex-row align-center">{% render 'cart-svg' %}</span> </button>
+</form>
+
+

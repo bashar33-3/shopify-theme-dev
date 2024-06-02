@@ -1,0 +1,64 @@
+<div class="three-column-showcase pad-x pad-y mw-container">
+    {% for block in section.blocks %}
+
+    <a href="{{block.settings.container_url}}">
+        <div class="container">
+
+            <img class="br zoom-in-effect" src="{{ block.settings.container_image | img_url: 'master' }}"
+                alt="container image">
+
+            <div class="container-content">
+                <h3 class="ff-secondary fs-32 fw-regular">{{block.settings.container_text}}</h3>
+            </div>
+        </div>
+    </a>
+
+    {% endfor %}
+</div>
+
+
+
+{% schema %}
+{
+"name": "Three Columns Showcase",
+"settings": [
+{
+"type": "header",
+"content": "Slider Settings"
+}
+],
+"blocks": [
+{
+"type": "container",
+"name": "Container",
+"settings": [
+{
+"id": "container_image",
+"type": "image_picker",
+"label": "Image",
+"info": "Select an image for the container."
+},
+{
+"id": "container_text",
+"type": "text",
+"label": "Text",
+"info": "Enter text for the container."
+},
+{
+"id": "container_url",
+"type": "url",
+"label": "URL",
+"info": "Enter a URL for the container."
+}
+]
+}
+],
+"presets": [
+{
+"name": "Three Columns Showcase",
+"category": "Custom"
+}
+],
+"max_blocks": 3
+}
+{% endschema %}

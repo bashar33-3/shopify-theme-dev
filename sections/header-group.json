@@ -1,0 +1,42 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "announcement-section",
+      "custom_css": [
+
+      ],
+      "settings": {
+        "text": "2 - 5 WORKING DAYS DELIVERY",
+        "show_dot_separator": true,
+        "seperator_gap": 55,
+        "text_margin": 0,
+        "colorBackground": "#000000",
+        "colorText": "#ffffff",
+        "stroke_width": 0,
+        "stroke_color": "#ffffff",
+        "font_family": "--ff-primary",
+        "fontSize": 12,
+        "small_font_size": 12,
+        "font_weight": "--fw-bold",
+        "height": 50,
+        "mobile_height": 50,
+        "position": 15,
+        "mobile_position": 15,
+        "speed": 7,
+        "mobile_speed": 12.6,
+        "link": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

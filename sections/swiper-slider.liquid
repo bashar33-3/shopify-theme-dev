@@ -1,0 +1,70 @@
+<div class="swiper hero-slider">
+    <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+
+        <div class="swiper-slide">
+            <a href="{{block.settings.slide_url}}">
+                <img src="{{ block.settings.slide_image | img_url: 'master' }}" alt="slide image of a product">
+            </a>
+        </div>
+
+        {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<script>
+    var swiper = new Swiper(".hero-slider", {
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        effect: "fade",
+        fadeEffect: {
+            crossFade: true
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: true,
+        },
+        loop: true,
+        speed: 1000,
+        fadeEffect: {
+            crossFade: true,
+        },
+    });
+</script>
+
+
+{% schema %}
+{
+"name": "Swiper Slider",
+"settings": [],
+"blocks": [
+{
+"type": "slide",
+"name": "Slide",
+"settings": [
+{
+"id": "slide_image",
+"type": "image_picker",
+"label": "Image",
+"info": "Select image for the Slide."
+},
+{
+"id": "slide_url",
+"type": "url",
+"label": "Link",
+"info": "Enter URL to link the slide to a product or page."
+}
+]
+}
+],
+"presets": [
+{
+"name": "Default",
+"category": "Custom"
+}
+]
+}
+{% endschema %}

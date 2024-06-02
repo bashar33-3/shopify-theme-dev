@@ -1,0 +1,160 @@
+<style>
+
+    .six-container-collection .section-title{
+        padding-inline: var(--container-padding-inline);
+    }
+    .six-container-collection .section-title h2{
+        padding-inline: 0 !important;
+    }
+
+    .six-container-collection{
+        padding-block: {{section.settings.padding_top}}px {{section.settings.padding_bottom}}px;
+    }
+    
+    
+    
+    .collection-grid{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px 25px;
+    }
+
+    
+    
+    
+    
+    @media (max-width:1150px){
+        .six-container-collection{
+            padding-block: calc({{section.settings.padding_top}}px / 2) calc({{section.settings.padding_bottom}}px / 2);
+        }
+        
+    }
+
+
+    @media (max-width:1000px){
+        .collection-grid{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+
+    @media (max-width:700px){
+        .collection-grid{
+            gap: 10px 10px;
+        }
+    }
+
+
+</style>
+
+
+
+<div class="six-container-collection mw-container pad-x">
+
+    <div class="section-title dflex-row justify-content-sb">
+
+        <h2 class="pad-x">{{ section.settings.section_title }}</h2>
+
+
+        <div class="section-cta dflex-row gap-10">
+            <a href="/collections">
+                <h3 class="underline-animation fw-regular">{{section.settings.section_cta_text}}</h3>
+                <span class="circle-chevron group-hover:colors">{%render 'small-chevron-right'%}</span>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="collection-grid">
+
+        {% for product in section.settings.collection.products limit:6 %}
+
+        <div class="product-card">
+            <div class="product-image">
+                <a href="{{product.url}}">
+                    <img class="product-image product-main-image"
+                        src="{{ product.featured_image  | img_url: 'master' }}" alt="{{product.title}} image">
+                    {% if product.images.size > 1 %}
+                    <img class="secondary-image" src="{{ product.images[1] | img_url: 'master' }}"
+                        alt="{{ product.title }} image">
+                    {% endif %}
+                </a>
+
+                {% include 'quick-add-form' %}
+
+            </div>
+
+            <div
+                    class="product-info background-neutral-100 dflex-col gap-10 text-center text-neutral-900 align-center">
+
+                    <div class="dflex-col gap-5">
+                        <h3 class="product-title fs-16 title-case text-neutral-900">{{ product.title }}</h3>
+                        <h4 class="fs-16 fw-regular product-price">{{ product.price | money }}</h4>
+
+                        <h5 class="fw-regular">Reviews</h5>
+                    </div>
+
+                </div>
+        </div>
+
+
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% schema %}
+{
+"name": "6 Containers Showcase",
+"settings": [
+{
+"type": "text",
+"id": "section_title",
+"label": "Enter Section Title"
+},
+{
+"type": "text",
+"id": "section_cta_text",
+"label": "Section CTA text"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Select Collection"
+},
+
+{
+"type": "range",
+"id": "padding_top",
+"label": "Padding Top (px)",
+"min": 0,
+"max": 100,
+"step": 1,
+"default": 0, 
+"info": "Select Padding Top in pixels"
+},
+
+
+{
+"type": "range",
+"id": "padding_bottom",
+"label": "Padding Bottom (px)",
+"min": 0,
+"max": 100,
+"step": 1,
+"default": 64, 
+"info": "Select Padding Bottom in pixels"
+}
+
+
+],
+"presets": [
+{
+"name": "6 Containers Showcase",
+"category": "Custom Sections"
+}
+]
+}
+{% endschema %}

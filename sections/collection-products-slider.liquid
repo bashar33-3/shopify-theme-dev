@@ -1,0 +1,263 @@
+<div class="collection-slider-section">
+
+
+    <div class="section-title dflex-row justify-content-sb">
+
+        <h2 class="pad-x">{{ section.settings.section_title }}</h2>
+
+
+        <div class="section-cta dflex-row gap-10">
+            <a href="/collections">
+                <h3 class="underline-animation fw-regular">View all</h3>
+                <span class="circle-chevron group-hover:colors">{%render 'small-chevron-right'%}</span>
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="swiper collection-slider pad-x">
+        <div class="swiper-wrapper">
+
+            {% for product in section.settings.collection.products %}
+
+            <div class="swiper-slide product-card">
+                <div class="product-image">
+                    <a href="{{product.url}}">
+                        <img class="product-image product-main-image"
+                            src="{{ product.featured_image  | img_url: 'master' }}" alt="{{product.title}} image">
+                        {% if product.images.size > 1 %}
+                        <img class="secondary-image" src="{{ product.images[1] | img_url: 'master' }}"
+                            alt="{{ product.title }} image">
+                        {% endif %}
+                    </a>
+
+                    {% include 'quick-add-form' %}
+
+
+                </div>
+                <div
+                    class="product-info background-neutral-100 dflex-col gap-10 text-center text-neutral-900 align-center">
+
+                    <div class="dflex-col gap-5">
+                        <h3 class="product-title fs-16 title-case text-neutral-900">{{ product.title }}</h3>
+                        <h4 class="fs-16 fw-regular product-price">{{ product.price | money }}</h4>
+                    </div>
+
+                    {% if product.variants.size > 0 %}
+                    <div class="product-variants dflex-row gap-5">
+                        {% for variant in product.variants limit:4 %}
+                        {% if variant.title != 'Default Title' %}
+                        <div class="variant">
+                            <label for="variant-{{ variant.id }}"
+                                class="variant-label{% if variant.image == empty %} no-image{% endif %}">
+                                {% if variant.image %}
+                                {% assign variantImageSrc = variant.image.src | img_url: 'master' %}
+                                <img class="variant-image" src="{{ variant.image.src | img_url: 'thumbnail' }}"
+                                    alt="{{ variant.title }} image"
+                                    onclick="updateMainImage('{{ variantImageSrc }}', this)">
+                                {% else %}
+                                <span class="variant-title" style="padding: 10px 20px; display: block;">{{ variant.title
+                                    }}</span>
+                                {% endif %}
+                                <input type="radio" id="variant-{{ variant.id }}" name="variant"
+                                    value="{{ variant.id }}" class="visually-hidden"
+                                    onchange="handleVariantSelection(this)">
+                            </label>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% if product.variants.size > 4 %}
+                        <div class="view-more-variants">
+                            {% assign remaining_variants = product.variants.size | minus: 4 %}
+                            <a href="{{ product.url }}">
+                                <div class="view-more-indicator">
+
+                                    <h3 class="text-neutral-900 fw-regular">
+                                        +{{ remaining_variants }}
+
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="swiper-navigation">
+
+
+            <div class="swiper-pagination"></div>
+
+            <div class="swiper-buttons">
+
+                <div class="swiper-button-prev">
+                    <div class="circle-button">
+                        <div class="arrow-borders"></div>
+                        <div class="arrow-shaft"></div>
+                    </div>
+                </div>
+                <div class="swiper-button-next">
+                    <div class="circle-button">
+                        <div class="arrow-borders"></div>
+                        <div class="arrow-shaft"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function updateMainImage(newImageSrc, clickedElement) {
+        // Find the closest product card element
+        var productCard = clickedElement.closest('.product-card');
+
+        // Find the main image within this product card
+        var mainImage = productCard.querySelector('.product-main-image');
+
+        // Add the fade-out class
+        mainImage.classList.add('fade-out');
+
+        // Wait for the fade-out transition to complete
+        setTimeout(function () {
+            // Update the main image source
+            mainImage.src = newImageSrc;
+
+            // Remove the fade-out class and add the fade-in class
+            mainImage.classList.remove('fade-out');
+            mainImage.classList.add('fade-in');
+
+            // Remove the fade-in class after the transition ends
+            mainImage.addEventListener('transitionend', function () {
+                mainImage.classList.remove('fade-in');
+            }, { once: true });
+        }, 300); // Match the timeout to the CSS transition duration
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Set border-radius to 50px for variant labels without an image
+        var variantLabels = document.querySelectorAll('.variant-label');
+        variantLabels.forEach(function (label) {
+            if (label.querySelector('.variant-image') === null) {
+                label.style.borderRadius = '50px';
+            }
+        });
+    });
+
+    function handleVariantSelection(element) {
+        // Remove 'selected' class from all variant labels
+        var variantLabels = document.querySelectorAll('.variant-label');
+        variantLabels.forEach(function (label) {
+            label.classList.remove('selected');
+            if (label.querySelector('.variant-image') === null) {
+                label.style.borderRadius = '50px'; // Set border-radius to 50px for labels without image
+            } else {
+                label.style.borderRadius = ''; // Reset border-radius to default value for labels with image
+            }
+        });
+
+        // Add 'selected' class to the label of the selected variant
+        if (element.checked) {
+            var selectedLabel = element.parentElement;
+            selectedLabel.classList.add('selected');
+        }
+    }
+</script>
+
+<script>
+    function updatePaddings() {
+        // Select the elements
+        const maxWidthContainer = document.querySelector('.mw-container');
+        const collectionSliderSection = document.querySelector('.collection-slider');
+        const swiperNavigation = document.querySelector('.swiper-navigation');
+        const sectionTitle = document.querySelector('.section-title');
+
+        // Calculate the paddings for the max-width container
+        const containerWidth = maxWidthContainer.offsetWidth;
+        const viewportWidth = window.innerWidth;
+        const paddingLeft = (viewportWidth - containerWidth) / 2;
+        const paddingRight = paddingLeft;
+
+        // Set the calculated padding-left to the collection slider section
+        collectionSliderSection.style.paddingLeft = `${paddingLeft}px`;
+        collectionSliderSection.style.paddingRight = `${paddingRight}px`;
+
+    }
+
+    // Run the function initially
+    updatePaddings();
+
+    // Update the paddings on window resize
+    window.addEventListener('resize', updatePaddings);
+</script>
+
+
+
+<script>
+    var swiper3 = new Swiper(".collection-slider", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "progressbar",
+        },
+
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        speed: 400,
+        slidesPerView: 1.25,
+        spaceBetween: 8,
+        breakpoints: {
+            700: {
+                slidesPerView: 2.5,
+                spaceBetween: 24,
+            },
+            1000: {
+                slidesPerView: 4.25,
+                spaceBetween: 24,
+            }
+        }
+    });
+</script>
+
+
+
+
+{% schema %}
+{
+"name": "Collection Slider",
+"settings": [
+{
+"type": "text",
+"id": "section_title",
+"label": "Section Title"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Select Collection"
+}
+],
+"presets": [
+{
+"name": "Collection Slider",
+"category": "Custom Sections"
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+{
+  "current": {
+    "logo_text": "Petriotics",
+    "logo_image": "shopify:\/\/shop_images\/project-primal-logo.png",
+    "sections": {
+      "swiper-slider": {
+        "type": "swiper-slider",
+        "blocks": {
+          "slide_4KEYM3": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/cloud_mats_oceanic_blue_slider.webp",
+              "slide_url": "shopify:\/\/products\/black-belt"
+            }
+          },
+          "slide_gbHpUf": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/weight_lifting_Lever_Belt_2.webp",
+              "slide_url": "shopify:\/\/products\/resistance-power-bands"
+            }
+          },
+          "slide_ciCPDH": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/black_gold_jana_1.webp",
+              "slide_url": ""
+            }
+          },
+          "slide_HYr8Cn": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/SACRED_RIPPLES_MANdala_cork_93be7221-ab11-4723-9b8a-a0347c3e6b00.webp",
+              "slide_url": ""
+            }
+          },
+          "slide_8byY4a": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/LIQUID_CHALK_WEBSITE.webp",
+              "slide_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "slide_4KEYM3",
+          "slide_gbHpUf",
+          "slide_ciCPDH",
+          "slide_HYr8Cn",
+          "slide_8byY4a"
+        ],
+        "settings": {
+        }
+      },
+      "sm-subcollection-slider": {
+        "type": "sm-subcollection-slider",
+        "blocks": {
+          "slide_xGUEif": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/DIMA_PURPLE_CHAKRA_jpg.png",
+              "slide_text": "Mats",
+              "slide_url": "shopify:\/\/collections\/mats"
+            }
+          },
+          "slide_T3pAga": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/yoga_Mat_essentials_1.png",
+              "slide_text": "YOGA|PILATES ESSENTIALS",
+              "slide_url": "shopify:\/\/collections\/yoga-essentials"
+            }
+          },
+          "slide_XpJzPz": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/Athlete_on_Yoga_Mat.png",
+              "slide_text": "Workout Bands",
+              "slide_url": "shopify:\/\/collections\/workout-bands"
+            }
+          },
+          "slide_YFMgGF": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/Blossom_Purple_Mat_sand_ground_48f750ef-4fe1-4f0e-af6f-7168029a3fae.png",
+              "slide_text": "Cloud Series Mats",
+              "slide_url": "shopify:\/\/collections\/cloud-series-yoga-mats"
+            }
+          },
+          "slide_MAWrqW": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/DIMA_GREEN_CHAKRA_1.png",
+              "slide_text": "Pro Series Mats",
+              "slide_url": "shopify:\/\/collections\/pro-series-yoga-mats"
+            }
+          },
+          "slide_hKDhhW": {
+            "type": "slide",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/sacred_ripples_cork_mat_held_in_hand.webp",
+              "slide_text": "Cork Series",
+              "slide_url": "shopify:\/\/collections\/yoga-cork-series"
+            }
+          }
+        },
+        "block_order": [
+          "slide_xGUEif",
+          "slide_T3pAga",
+          "slide_XpJzPz",
+          "slide_YFMgGF",
+          "slide_MAWrqW",
+          "slide_hKDhhW"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
+  "presets": {
+    "Default": {
+    }
+  }
+}

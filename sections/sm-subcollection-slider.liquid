@@ -1,0 +1,125 @@
+<div class="swiper sm-subcollection-slider pad-x">
+    <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+
+        <div class="swiper-slide">
+            <a href="{{block.settings.slide_url}}">
+                <img class="zoom-in-effect" src="{{ block.settings.slide_image | img_url: 'master' }}"
+                    alt="slide image">
+
+                <div class="text-neutral-100 dflex-row justify-content-sb align-center">
+                    <h3 class="uppercase">{{block.settings.slide_text}}</h3>
+
+                    <span class="slider-arrow-icon">
+                        {% render 'slider-small-arrow' %}
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="swiper-button-next">
+        <div class="circle-button">
+            <div class="arrow-borders"></div>
+            <div class="arrow-shaft"></div>
+        </div>
+    </div>
+    <div class="swiper-button-prev">
+        <div class="circle-button">
+            <div class="arrow-borders"></div>
+            <div class="arrow-shaft"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var swiper2 = new Swiper(".sm-subcollection-slider", {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        speed: 400,
+        slidesPerView: 2.5,
+        spaceBetween: 8,
+        breakpoints: {
+            700: {
+                slidesPerView: 4,
+                spaceBetween: 24
+            },
+            1000: {
+                slidesPerView: 5,
+                spaceBetween: 24
+            },
+            1400: {
+                slidesPerView: 6,
+                spaceBetween: 24
+            }
+        }
+
+    });
+</script>
+
+<script>
+    // Function to set the height of the slider equal to its width
+    function setSliderHeight() {
+        var slider = document.querySelector(".sm-subcollection-slider");
+        var sliderWidth = slider.offsetWidth; // Get the width of the slider
+        slider.style.height = sliderWidth + "px"; // Set the height of the slider equal to its width
+    }
+
+    // Call the function when the page loads and when it is resized
+    window.addEventListener("load", setSliderHeight);
+    window.addEventListener("resize", setSliderHeight);
+</script>
+
+
+
+
+{% schema %}
+{
+"name": "6 Small Cards Slider",
+"settings": [
+{
+"type": "header",
+"content": "Slider Settings"
+}
+],
+"blocks": [
+{
+"type": "slide",
+"name": "Slide",
+"settings": [
+{
+"id": "slide_image",
+"type": "image_picker",
+"label": "Image",
+"info": "Select an image for the slide."
+},
+{
+"id": "slide_text",
+"type": "text",
+"label": "Text",
+"info": "Enter text for the slide."
+},
+{
+"id": "slide_url",
+"type": "url",
+"label": "URL",
+"info": "Enter a URL for the slide."
+}
+]
+}
+],
+"presets": [
+{
+"name": "6 Small Cards Slider",
+"category": "Custom"
+}
+],
+"max_blocks": 6
+}
+{% endschema %}

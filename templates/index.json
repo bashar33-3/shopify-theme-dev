@@ -1,0 +1,201 @@
+{
+  "sections": {
+    "swiper-slider": {
+      "type": "swiper-slider",
+      "blocks": {
+        "slide_AA8eHU": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/cloud_mats_oceanic_blue_slider.webp",
+            "slide_url": "shopify:\/\/collections\/mats"
+          }
+        },
+        "slide_xtzMih": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/weight_lifting_Lever_Belt_2.webp",
+            "slide_url": "shopify:\/\/collections\/belts"
+          }
+        },
+        "slide_CQrArU": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/black_gold_jana_1.webp",
+            "slide_url": "shopify:\/\/collections\/pro-series-yoga-mats"
+          }
+        },
+        "slide_f3jcjD": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/SACRED_RIPPLES_MANdala_cork_93be7221-ab11-4723-9b8a-a0347c3e6b00.webp",
+            "slide_url": "shopify:\/\/collections\/yoga-cork-series"
+          }
+        },
+        "slide_NiKKPy": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/LIQUID_CHALK_WEBSITE.webp",
+            "slide_url": "shopify:\/\/collections\/weight-lifting-gear"
+          }
+        }
+      },
+      "block_order": [
+        "slide_AA8eHU",
+        "slide_xtzMih",
+        "slide_CQrArU",
+        "slide_f3jcjD",
+        "slide_NiKKPy"
+      ],
+      "settings": {
+      }
+    },
+    "sm_subcollection_slider_hQRkMN": {
+      "type": "sm-subcollection-slider",
+      "blocks": {
+        "slide_gW8EwN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/DIMA_PURPLE_CHAKRA_jpg.png",
+            "slide_text": "mats",
+            "slide_url": "shopify:\/\/collections\/mats"
+          }
+        },
+        "slide_jatTEm": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/yoga_Mat_essentials_1.png",
+            "slide_text": "YOGA|PILATES ESSENTIALS",
+            "slide_url": "shopify:\/\/collections\/yoga-essentials"
+          }
+        },
+        "slide_8tR83z": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/Athlete_on_Yoga_Mat.png",
+            "slide_text": "Workout Bands",
+            "slide_url": "shopify:\/\/collections\/workout-bands"
+          }
+        },
+        "slide_TniT6j": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/Blossom_Purple_Mat_sand_ground_48f750ef-4fe1-4f0e-af6f-7168029a3fae.png",
+            "slide_text": "CLOUD SERIES MATS",
+            "slide_url": "shopify:\/\/collections\/cloud-series-yoga-mats"
+          }
+        },
+        "slide_jkUKhM": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/DIMA_GREEN_CHAKRA_1.png",
+            "slide_text": "PRO-SERIES MATS",
+            "slide_url": "shopify:\/\/collections\/pro-series-yoga-mats"
+          }
+        },
+        "slide_tgWtza": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify:\/\/shop_images\/sacred_ripples_cork_mat_held_in_hand.webp",
+            "slide_text": "CORK-SERIES",
+            "slide_url": "shopify:\/\/collections\/yoga-cork-series"
+          }
+        }
+      },
+      "block_order": [
+        "slide_gW8EwN",
+        "slide_jatTEm",
+        "slide_8tR83z",
+        "slide_TniT6j",
+        "slide_jkUKhM",
+        "slide_tgWtza"
+      ],
+      "settings": {
+      }
+    },
+    "three_column_showcase_1wide_2equal_HReHfh": {
+      "type": "three-column-showcase-1wide-2equal",
+      "blocks": {
+        "container_a7GFTA": {
+          "type": "container",
+          "settings": {
+            "container_image": "shopify:\/\/shop_images\/Belts_reordered_38004752-e2d1-4bec-a134-40bc75f564d8.webp",
+            "container_text": "Belts",
+            "container_url": "shopify:\/\/collections\/belts"
+          }
+        },
+        "container_7CrJJ9": {
+          "type": "container",
+          "settings": {
+            "container_image": "shopify:\/\/shop_images\/elbow_wraps_website.webp",
+            "container_text": "Lifting Gear",
+            "container_url": "shopify:\/\/collections\/fitness-and-weight-lifting"
+          }
+        },
+        "container_aUCfVr": {
+          "type": "container",
+          "settings": {
+            "container_image": "shopify:\/\/shop_images\/beltonshoulder.webp",
+            "container_text": "CrossFit",
+            "container_url": "shopify:\/\/collections\/crossfit"
+          }
+        }
+      },
+      "block_order": [
+        "container_a7GFTA",
+        "container_7CrJJ9",
+        "container_aUCfVr"
+      ],
+      "settings": {
+      }
+    },
+    "collection_products_slider_PcYe8U": {
+      "type": "collection-products-slider",
+      "settings": {
+        "section_title": "Workout Essentials",
+        "collection": "fitness-and-weight-lifting"
+      }
+    },
+    "announcement_section_mJFm6X": {
+      "type": "announcement-section",
+      "settings": {
+        "text": "Mat Discounts",
+        "show_dot_separator": false,
+        "seperator_gap": 0,
+        "text_margin": 57,
+        "colorBackground": "#000000",
+        "colorText": "#000000",
+        "stroke_width": 1,
+        "stroke_color": "#ffffff",
+        "font_family": "--ff-secondary",
+        "fontSize": 60,
+        "small_font_size": 26,
+        "font_weight": "--fw-regular",
+        "height": 94,
+        "mobile_height": 41,
+        "position": 10,
+        "mobile_position": 4,
+        "speed": 7,
+        "mobile_speed": 7,
+        "link": ""
+      }
+    },
+    "six_contianer_collection_showcase_ghjc7r": {
+      "type": "six-contianer-collection-showcase",
+      "settings": {
+        "section_title": "",
+        "section_cta_text": "View All Colors",
+        "collection": "mandala-edition-mats",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "swiper-slider",
+    "sm_subcollection_slider_hQRkMN",
+    "three_column_showcase_1wide_2equal_HReHfh",
+    "collection_products_slider_PcYe8U",
+    "announcement_section_mJFm6X",
+    "six_contianer_collection_showcase_ghjc7r"
+  ]
+}

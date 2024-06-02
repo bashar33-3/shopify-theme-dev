@@ -1,0 +1,274 @@
+<style>
+    .custom-marquee.announcement-{{ section.id }} {
+        position: relative;
+        width: 100vw;
+        max-width: 100%;
+        height: {{section.settings.height}}px;
+        overflow-x: hidden;
+        font-family: var({{section.settings.font_family}});
+        font-weight: var({{section.settings.font_weight}});
+    }
+
+    .custom-marquee.announcement-{{ section.id }} .track {
+        position: absolute;
+        bottom: {{section.settings.position}}px;
+        white-space: nowrap;
+        will-change: transform;
+        animation: marquee {{section.settings.speed}}s linear infinite;
+        color: {{section.settings.colorText}};
+        /* Text fill color */
+        -webkit-text-stroke: {{section.settings.stroke_width}}px {{section.settings.stroke_color}};
+        /* Stroke color and width */
+    }
+
+    .custom-marquee.announcement-{{ section.id }} .content {
+        margin-left: {{section.settings.text_margin}}px;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-20%);
+        }
+    }
+
+    @media (max-width:700px){
+        .custom-marquee.announcement-{{ section.id }}{
+            font-size: {{section.settings.small_font_size}}px !important;
+            height: {{section.settings.mobile_height}}px !important;
+        }
+
+        .custom-marquee.announcement-{{ section.id }} .track {
+        animation: marquee {{section.settings.mobile_speed}}s linear infinite;
+        bottom: {{section.settings.mobile_position}}px;
+    }
+    }
+
+    .custom-marquee.announcement-{{ section.id }} .dot {
+    margin: 0 {{section.settings.seperator_gap}}px; /* Adjust the value as needed */
+}
+</style>
+
+
+<div class="custom-marquee announcement-{{ section.id }}" role="region" {{ block.shopify_attributes }}
+    style="font-size: {{ section.settings.fontSize }}px; background-color: {{ section.settings.colorBackground }};">
+    {%- if section.settings.text != blank -%}
+    {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}" class="">
+        {%- endif -%}
+        <div class="track">
+            {%- for i in (1..10) -%}
+            <span class="content marquee-text">{{ section.settings.text | escape }}</span>
+            {%- if section.settings.show_dot_separator and i < 10 -%}
+            <span class="content dot">•</span>
+            {%- endif -%}
+            {%- endfor -%}
+            {%- if section.settings.link != blank -%}
+            {% render 'icon-arrow' %}
+            {%- endif -%}
+        </div>
+        {%- if section.settings.link != blank -%}
+    </a>
+    {%- endif -%}
+    {%- endif -%}
+</div>
+<script>
+    var marquees = document.getElementsByClassName("marquee-text");
+    for (let i = 0; i < marquees.length; i++) {
+        // console.log(marquees.item(i));
+        let str = marquees.item(i).innerHTML;
+        let improvedText = str.replaceAll("|", "            ")
+        console.log(improvedText)
+        marquees.item(i).innerHTML = improvedText
+    }
+</script>
+
+{% schema %}
+{
+"name": "Marquee Announcement",
+"settings": [
+{
+"type": "text",
+"id": "text",
+"default": "Welcome to our store",
+"label": "Add text to display"
+},
+{
+  "type": "checkbox",
+  "id": "show_dot_separator",
+  "label": "Show Dot Separator",
+  "default": false
+},
+{
+    "type": "range",
+    "id": "seperator_gap",
+    "label": "Separator Gap (px)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "default": 30, 
+    "info": "Select Seperator Gap in pixels"
+},
+{
+    "type": "range",
+    "id": "text_margin",
+    "label": "Text Margin Left (px)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "default": 40, 
+    "info": "Select Text Margin Left in pixels"
+},
+{
+"type": "color",
+"id": "colorBackground",
+"label": "Background color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "colorText",
+"label": "Text color",
+"default": "#fff"
+},
+{
+"type": "range",
+"id": "stroke_width",
+"label": "Stroke Width (px)",
+"min": 0,
+"max": 5,
+"step": 1,
+"default": 2, 
+"info": "Select Stroke Width in pixels"
+},
+{
+"type": "color",
+"id": "stroke_color",
+"label": "Stroke color",
+"default": "#fff"
+},
+{
+"type": "select",
+"id": "font_family",
+"label": "Font Family",
+"options": [
+{
+    "value": "--ff-primary",
+    "label": "Futura"
+},
+{
+    "value": "--ff-secondary",
+    "label": "Righteous"
+}
+],
+"default": "--ff-secondary",
+"info": "Choose the font family"
+},
+{
+"type": "range",
+"id": "fontSize",
+"label": "Font Size (px)",
+"min": 12,
+"max": 60,
+"step": 1,
+"default": 16, 
+"info": "Select font size in pixels"
+},
+{
+"type": "range",
+"id": "small_font_size",
+"label": "Small Screen Font Size (px)",
+"min": 12,
+"max": 60,
+"step": 1,
+"default": 16, 
+"info": "Select font size in pixels"
+},
+{
+  "type": "select",
+  "id": "font_weight",
+  "label": "Font Weight",
+  "options": [
+    {
+      "value": "--fw-regular",
+      "label": "Regular"
+    },
+    {
+      "value": "--fw-bold",
+      "label": "Bold"
+    }
+  ],
+  "default": "--fw-regular",
+  "info": "Choose the font weight"
+},
+{
+    "type": "number",
+    "id": "height",
+    "label": "Height of Announcement (px)",
+    "default": 100,
+    "info": "Enter height in pixels"
+},
+{
+    "type": "number",
+    "id": "mobile_height",
+    "label": "Height of Announcement (px)",
+    "default": 50,
+    "info": "Enter mobile screen height in pixels"
+},
+{
+    "type": "range",
+    "id": "position",
+    "label": "Bottom Position (px)",
+    "min": 0,
+    "max": 20,
+    "step": 1,
+    "default": 6, 
+    "info": "Select bottom position in pixels"
+},
+{
+    "type": "range",
+    "id": "mobile_position",
+    "label": "Bottom Position (px)",
+    "min": 0,
+    "max": 20,
+    "step": 1,
+    "default": 7, 
+    "info": "Select mobile bottom position in pixels"
+},
+{
+"type": "range",
+"id": "speed",
+"label": "Desktop Speed",
+"min": 0,
+"max": 20,
+"step": 0.2,
+"default": 7, 
+"info": "Select speed size in seconds"
+},
+{
+"type": "range",
+"id": "mobile_speed",
+"label": "Mobile Speed",
+"min": 0,
+"max": 20,
+"step": 0.2,
+"default": 7, 
+"info": "Select speed size in seconds"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link"
+}
+],
+"presets": [
+{
+"name": "Marquee Announcement",
+"category": "Custom Sections"
+}
+]
+}
+{% endschema %}
