@@ -138,10 +138,11 @@
     overflow-x: hidden;
   }
 
-  .not-empty-cart > div:nth-child(2){
+  .cartdrawer-bottom{
     padding: 34px 40px;
 
     border-top: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: #272727;
 
 
   }
@@ -272,7 +273,43 @@
   }
 
 
+  .order-note-container {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, visibility 0.1s ease-in-out;
+    background-color: #272727;
+    transform: translateY(100%);
+    bottom: 0;
+    visibility: hidden;
+}
 
+  .order-note-container.visible {
+    transform: translateY(0);
+    visibility: visible;
+
+  }
+
+  .order-note-container-inner {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 34px 40px;
+  }
+
+  .save-order-note{
+    width: fit-content !important;
+  }
+
+  .order-note-container textarea{
+    background: transparent;
+    padding: 24px 20px 8px 20px;
+    border-radius: 8px;
+
+  }
+
+  .order-note-container textarea::placeholder{
+    font-family: var(--ff-primary);
+  }
 
 
 
@@ -310,7 +347,7 @@
   }
 
   .not-empty-cart > div:nth-child(1),
-    .not-empty-cart> div:nth-child(2){
+    .cartdrawer-bottom {
       padding: 20px;
     }
 
@@ -346,6 +383,10 @@
   .cart-content{
     height: 98.5dvh;
     transform: translateY(-97.75dvh);
+  }
+
+  .order-note-container-inner{
+    padding: 20px;
   }
 
   
@@ -482,17 +523,26 @@
           <div id="cart-items-container" class="cart-items-container"></div>
 
         </div>
-
-
-        <div class="cartdrawer-bottom dflex-col gap-5">
+        
+        <div class="order-note-container">
+  
+          <div class="order-note-container-inner dflex-col justify-content-sb gap-20">
+            <h2 class="ff-secondary fs-24">Order Note</h2>
+            <textarea name="order-note" id="order-note" cols="30" rows="3" placeholder="Order note"></textarea>
+            <button id="save-order-note" class="btn-secondary save-order-note fs-16">Save</button>
+          </div>
+        </div>
+        
+        <div class="cartdrawer-bottom dflex-col gap-5 relative">
+          
           <div class="cartdrawer-total dflex-row justify-content-sb align-center ff-secondary fw-regular fs-24">
             <h2 class="fw-regular">Total</h2>
             <h3 id="cart-total" class="cart-total fw-regular">$73</h3>
           </div>
-
+          
           <h5 class="fs-16 text-neutral-100-7 fw-regular">Taxes and shipping calculated at checkout</h5>
           <h6 class="add-order-note underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">Add order note</h6>
-
+          
           <div class="cartdrawer-cta dflex-row justify-content-sb gap-10">
             <a href="/cart"><button class="btn-secondary">View Cart</button></a>
             <a href="/checkout"><button class="btn-primary dflex-row align-center justify-content-center gap-10"><span>{% render 'checkout-icon' %}</span>  Checkout</button></a>
@@ -506,6 +556,37 @@
   </div>
 
 </div>
+
+
+<!-- order note script visibility -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  const addOrderNoteButton = document.querySelector(".add-order-note");
+  const orderNoteContainer = document.querySelector(".order-note-container");
+  const cartDrawerBottom = document.querySelector(".cartdrawer-bottom");
+
+  function updateOrderNoteContainerPosition() {
+    const cartDrawerBottomHeight = cartDrawerBottom.offsetHeight;
+    orderNoteContainer.style.bottom = `${cartDrawerBottomHeight}px`;
+  }
+
+  if (addOrderNoteButton && orderNoteContainer && cartDrawerBottom) {
+    addOrderNoteButton.addEventListener("click", function() {
+      orderNoteContainer.classList.toggle("visible");
+      updateOrderNoteContainerPosition();
+    });
+
+    // Initial position update
+    updateOrderNoteContainerPosition();
+
+    // Update position on window resize
+    window.addEventListener("resize", updateOrderNoteContainerPosition);
+  }
+});
+
+</script>
 
 
 
