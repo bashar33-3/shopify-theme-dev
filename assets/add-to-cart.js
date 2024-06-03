@@ -8,15 +8,27 @@ function loadCart() {
         ".header-cart-count h1"
       );
       const itemCount = data.item_count;
+      const totalPrice = calculateTotalPrice(data.items);
 
       cartCountElements.forEach((element) => {
         element.textContent = itemCount;
       });
 
+      document.getElementById("cart-total").textContent = `$${totalPrice}`;
+
       toggleCartView(itemCount);
       displayCartItems(data.items);
     })
     .catch((error) => console.error("Error fetching cart:", error));
+}
+
+// Function to calculate the total price of items in the cart
+function calculateTotalPrice(items) {
+  let total = 0;
+  items.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+  return (total / 100).toFixed(2); // Assuming the price is in cents, convert to dollars
 }
 
 // Function to toggle cart view based on item count
