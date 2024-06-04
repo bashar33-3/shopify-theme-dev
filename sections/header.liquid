@@ -1,5 +1,4 @@
 <style>
-
   .cart-overlay {
     position: fixed;
     top: 0;
@@ -14,20 +13,19 @@
     transition: width 0s, opacity 0.2s ease;
   }
 
-  .cart-content {
+  .drawer-content {
     width: 100%;
     max-width: 0;
     background-color: #272727;
     border-radius: 17px;
     overflow: hidden;
-    transition: max-width 0.4s cubic-bezier(0.29,-0.06, 1, 0.08);
+    transition: max-width 0.4s cubic-bezier(0.29, -0.06, 1, 0.08);
     z-index: 999;
     height: 97dvh;
     transform: translateY(-98.5dvh);
-
   }
 
-  .cart-content-wrapper{
+  .drawer-content-wrapper {
     height: 97dvh;
     position: fixed;
     padding-inline: var(--container-padding-inline-phone);
@@ -50,33 +48,33 @@
     opacity: 1;
   }
 
-  .cart-products{
+  .cart-products {
     opacity: 0;
   }
 
-  .cart-products.closing{
+  .cart-products.closing {
     opacity: 0;
     transition: opacity 0.1s ease;
   }
-  
-  .cart-products.visible{
+
+  .cart-products.visible {
     opacity: 1;
     transition: opacity 0.3s 0.5s ease;
   }
-  
-  .cart-content.visible {
+
+  .drawer-content.visible {
     max-width: 648px;
   }
 
   .cart-products.empty {
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
   .cart-products.not-empty {
     height: 100%;
@@ -84,40 +82,38 @@
     flex-direction: column;
   }
 
-
-
-  .cart-content .icon-close {
+  .drawer-content .icon-close {
     stroke: var(--clr-neutral-100);
     cursor: pointer;
   }
 
-  .empty-cart .cart-close{
+  .empty-cart .cart-close {
     position: absolute;
     top: 30px;
     right: 30px;
   }
 
-  .cart-products .icon-cart{
+  .cart-products .icon-cart {
     width: 48px;
     height: 48px;
   }
 
-  .cart-products .header-cart-count{
+  .cart-products .header-cart-count {
     left: 2em;
     top: -0.6em;
   }
 
-  .cart-products .count-bubble{
+  .cart-products .count-bubble {
     width: 28px;
     height: 28px;
   }
 
-  .cart-products .empty-cart button{
+  .cart-products .empty-cart button {
     padding: 17.2px 40px;
     font-size: var(--fs-200);
   }
 
-  .empty-cart{
+  .empty-cart {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -125,68 +121,74 @@
     gap: 25px;
   }
 
-  .not-empty-cart{
+  .not-empty-cart {
     height: 100%;
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
   }
-  
-  .not-empty-cart > div:nth-child(1){
+
+  .not-empty-cart>div:nth-child(1) {
     padding: 34px 40px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
-  .cartdrawer-bottom{
+  .cartdrawer-bottom {
     padding: 34px 40px;
 
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     background-color: #272727;
-
-
   }
 
   /* Scrollbar Track */
-.not-empty-cart::-webkit-scrollbar-track {
-  background-color: transparent; /* Set the background color of the scrollbar track */
-}
+  .not-empty-cart::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Set the background color of the scrollbar track */
+  }
 
-/* Scrollbar Thumb */
-.not-empty-cart::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3); /* Set the color of the scrollbar thumb */
-  border-radius: 10px; /* Set the border radius of the scrollbar thumb */
-}
+  /* Scrollbar Thumb */
+  .not-empty-cart::-webkit-scrollbar-thumb {
+    background-color: rgba(255,
+        255,
+        255,
+        0.3);
+    /* Set the color of the scrollbar thumb */
+    border-radius: 10px;
+    /* Set the border radius of the scrollbar thumb */
+  }
 
-/* Thin Scrollbar */
-.not-empty-cart::-webkit-scrollbar {
-  width: 5px; /* Set the width of the scrollbar */
-}
+  /* Thin Scrollbar */
+  .not-empty-cart::-webkit-scrollbar {
+    width: 5px;
+    /* Set the width of the scrollbar */
+  }
 
-/* Hide scrollbar when not interacting */
-.not-empty-cart::-webkit-scrollbar-thumb:active {
-  background-color: rgba(255, 255, 255, 0.3); /* Set the color of the scrollbar thumb when active (being dragged) */
-}
+  /* Hide scrollbar when not interacting */
+  .not-empty-cart::-webkit-scrollbar-thumb:active {
+    background-color: rgba(255,
+        255,
+        255,
+        0.3);
+    /* Set the color of the scrollbar thumb when active (being dragged) */
+  }
 
-
-  .not-empty-cart .header-cart-count{
+  .not-empty-cart .header-cart-count {
     position: static;
   }
 
-  .cart-items-container{
+  .cart-items-container {
     display: flex;
     flex-direction: column;
   }
 
-
-
-  .not-empty-cart .cart-item{
-    max-height: 200px; 
+  .not-empty-cart .cart-item {
+    max-height: 200px;
     transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
     overflow: hidden;
   }
 
-  .cart-item-inner{
+  .cart-item-inner {
     display: grid;
     padding-top: 24px;
     gap: 0 20px;
@@ -198,47 +200,45 @@
     opacity: 0;
   }
 
-
-
-  .cart-item-image{
+  .cart-item-image {
     width: 96px;
     height: 96px;
     border-radius: 5px;
     overflow: hidden;
   }
 
-  .cartdrawer-header{  }
+  .cartdrawer-header {}
 
-  .cart-item-details{
+  .cart-item-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
   }
 
-  .cartdrawer-bottom{
+  .cartdrawer-bottom {
     /* height: 23%; */
   }
 
-  .cartdrawer-bottom button{
+  .cartdrawer-bottom button {
     padding: 17px 40px;
     width: 50%;
     font-size: var(--fs-200);
   }
 
-  .cartdrawer-total{
+  .cartdrawer-total {
     letter-spacing: 1.2px;
   }
 
-  .cartdrawer-cta{
+  .cartdrawer-cta {
     padding-top: 20px;
   }
 
-  .add-order-note{
+  .add-order-note {
     cursor: pointer;
   }
 
-  .quantity-remove{
+  .quantity-remove {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -247,12 +247,11 @@
     cursor: pointer;
   }
 
-  .quantity-input{
+  .quantity-input {
     background: transparent;
     color: var(--clr-neutral-100);
     width: 48px;
     padding-block: 8px;
-    
   }
 
   input[type="number"]::-webkit-outer-spin-button,
@@ -260,6 +259,7 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
   input[type="number"] {
     -moz-appearance: textfield;
     text-align: center;
@@ -267,28 +267,27 @@
     border-radius: 8px;
     font-size: 12px;
   }
-  input[type="number"]:focus{
+
+  input[type="number"]:focus {
     border: 1px solid rgba(255, 255, 255, 0.12);
     outline: none;
   }
-
 
   .order-note-container {
     position: absolute;
     left: 0;
     width: 100%;
     overflow: hidden;
-    transition: transform 0.2s ease-in-out, visibility 0.1s ease-in-out;
+    transition: transform 0.2s ease-in-out, opacity 0.1s ease-in-out;
     background-color: #272727;
     transform: translateY(100%);
     bottom: 0;
-    visibility: hidden;
-}
+    opacity: 0;
+  }
 
   .order-note-container.visible {
     transform: translateY(0);
-    visibility: visible;
-
+    opacity: 1;
   }
 
   .order-note-container-inner {
@@ -296,408 +295,508 @@
     padding: 34px 40px;
   }
 
-  .save-order-note{
+  .save-order-note {
     width: fit-content !important;
   }
 
-  .order-note-container textarea{
+  .order-note-container textarea {
     background: transparent;
     padding: 24px 20px 8px 20px;
     border-radius: 8px;
-
   }
 
-  .order-note-container textarea::placeholder{
+  .order-note-container textarea::placeholder {
     font-family: var(--ff-primary);
   }
 
-
-
-
-  @media (max-width:700px){
-    .cart-content {
-    transition: max-width 0.4s linear;
-  }
-   
-    .cart-products .icon-cart{
-    width: 32px;
-    height: 32px;
+  .search-overlay-content {
+    padding: 32px 40px 40px 40px;
+    height: 100%;
+    overflow-y: auto;
   }
 
-  .not-empty-cart .cart-item-inner{
-    padding-top: 16px;
-
+  .search-overlay-content-header {
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 12px;
+    transition: border-bottom 0.2s ease-in-out;
   }
 
-  .cart-item-image{
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-    overflow: hidden;
+  .search-overlay form,
+  .search-overlay input {
+    width: 100%;
   }
 
-
-  .cartdrawer-total{
-    font-size: 18px !important;
+  .search-overlay input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
   }
 
-  .cartdrawer-bottom h5,
-  .cartdrawer-bottom h6{
-    font-size: 12px;
+  .search-overlay input {
+    background: transparent;
+    font-size: var(--fs-600);
+    border: none;
+    outline: none;
+    color: var(--clr-neutral-100);
+    caret-color: rgba(255, 255, 255, 1);
   }
 
-  .not-empty-cart > div:nth-child(1),
+  .search-overlay input::placeholder {
+    font-weight: var(--fw-bold);
+  }
+
+  .search-overlay:focus-within .search-overlay-content-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 1);
+    /* Focus state */
+  }
+
+  .search-results {
+    width: 100%;
+    display: none;
+    flex-direction: column-reverse;
+  }
+
+  .search-result-title{
+    gap: 1.25rem;
+  }
+
+  .search-results.visible {
+    display: flex;
+  }
+
+  .clear-search {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .search-results-section {
+    width: 100%;
+  }
+
+  .search-results-section h4 {
+    cursor: pointer;
+    /* Add styling for section titles */
+  }
+
+  .search-results-section .search-result-items {
+    display: none;
+  }
+
+  .search-results-section .search-result-items.visible {
+    display: block;
+  }
+
+  .search-result-items {
+    display: none;
+  }
+
+  .search-result-items.visible {
+    display: block;
+  }
+
+  .search-result-title h4 {
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: var(--fs-500);
+    font-family: var(--ff-secondary);
+    font-weight: var(--fw-regular);
+    color: rgba(255, 255, 255);
+    opacity: 0.3;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .search-result-title h4:hover {
+    opacity: 1;
+  }
+
+  .search-result-title h4.active {
+    opacity: 1; 
+}
+
+  .no-results{
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 700px) {
+    .drawer-content {
+      transition: max-width 0.4s linear;
+    }
+
+    .cart-products .icon-cart {
+      width: 32px;
+      height: 32px;
+    }
+
+    .not-empty-cart .cart-item-inner {
+      padding-top: 16px;
+    }
+
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .cartdrawer-total {
+      font-size: 18px !important;
+    }
+
+    .cartdrawer-bottom h5,
+    .cartdrawer-bottom h6 {
+      font-size: 12px;
+    }
+
+    .not-empty-cart>div:nth-child(1),
     .cartdrawer-bottom {
       padding: 20px;
     }
 
-    .cartdrawer-cta{
+    .cartdrawer-cta {
       flex-direction: column;
     }
-    .cartdrawer-bottom button{
+
+    .cartdrawer-bottom button {
       width: 100%;
     }
 
-    .not-empty-cart > div:nth-child(1){
-    height: 70dvh;
+    .not-empty-cart>div:nth-child(1) {
+      height: 70dvh;
+    }
+
+    .not-empty-cart .cart-item-inner>div:nth-child(2) {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .quantity-remove {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .quantity-input {
+      padding-block: 4px;
+      width: 44px;
+    }
+
+    .drawer-content-wrapper {
+      padding-inline: 6px;
+    }
+
+    .drawer-content {
+      height: 98.5dvh;
+      transform: translateY(-97.75dvh);
+    }
+
+    .order-note-container-inner {
+      padding: 20px;
+    }
   }
-
-  .not-empty-cart .cart-item-inner > div:nth-child(2){
-    flex-direction: column;
-    gap: 5px;
-  }
-  .quantity-remove{
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .quantity-input{
-    padding-block: 4px;
-    width: 44px;
-  }
-
-  .cart-content-wrapper{
-    padding-inline: 6px;
-  }
-
-  .cart-content{
-    height: 98.5dvh;
-    transform: translateY(-97.75dvh);
-  }
-
-  .order-note-container-inner{
-    padding: 20px;
-  }
-
-  
-  }
-
-  @media (max-width:370px){
-    
-
-
-
-  }
-
-  
 </style>
 
-
 <header class="header-section align-center pad-x">
-
   <div class="header-logo-wrapper">
     <a href="/">
-      <img class="header-logo" src="{{settings.logo_image |  img_url: 'medium'}}" alt="Petriotics Logo">
+      <img class="header-logo" src="{{ settings.logo_image | img_url : 'medium' }}" alt="Petriotics Logo" />
     </a>
   </div>
 
-
   <ul role="list" class="header-menu dflex-row fw-bold flex-wrap justify-content-center">
-
-
     {% for link in linklists.main-menu.links -%}
     <li class="menu-item">
       <div class="dflex-row justify-content-sb gap-10 align-center">
-        {{ link.title | link_to: link.url }}
-        {% if link.title == 'Fitness & Weight Lifting' or link.title == 'Yoga Essentials' or link.title == 'Mats' %}
+        {{ link.title | link_to : link.url }}
+        {% if link.title == 'Fitness & Weight Lifting' or link.title == 'Yoga
+        Essentials' or link.title == 'Mats' %}
         <span class="chevron" onclick="toggleSubMenu(this)">
-
           {% render 'chevron-down-svg' %}
         </span>
-
       </div>
       <ul class="sub-menu fs-16 fw-regular">
         <div class="sub-menu-dropdown">
-
           {% for childlink in link.links %}
-          <li>{{ childlink.title | link_to: childlink.url }}</li>
+          <li>{{ childlink.title | link_to : childlink.url }}</li>
           {% endfor %}
-
         </div>
       </ul>
     </li>
-    {% endif %}
-    {%- endfor %}
-
+    {% endif %} {%- endfor %}
   </ul>
-
-
 
   <div class="text-neutral-100 dflex-row gap-24">
     <div class="price-picker custom-select dflex-row align-center gap-10">
-      <div data-value="USD" class="dflex-row align-center justify-content-center gap-10 fw-bold fs-14"><span
-          class="country-flags country-flag-LB"></span> USD $</div>
+      <div data-value="USD" class="dflex-row align-center justify-content-center gap-10 fw-bold fs-14">
+        <span class="country-flags country-flag-LB"></span> USD $
+      </div>
       <span class="chevron" onclick="toggleSubMenu(this)">
-
         {% render 'chevron-down-svg' %}
       </span>
-
     </div>
 
-    {% render 'search-svg' %}
+    <span onclick="showSearchOverlay()"> {% render 'search-svg' %} </span>
 
     <div class="relative" onclick="showCartOverlay()">
       <span>{% render 'cart-svg' %}</span>
       <div class="header-cart-count">
-          <cart-count class="count-bubble">
-              <h1>{{ cart.item_count }}</h1>
-          </cart-count>
+        <cart-count class="count-bubble">
+          <h1>{{ cart.item_count }}</h1>
+        </cart-count>
       </div>
     </div>
   </div>
-
-
 </header>
 
+<div id="cart-overlay" class="cart-overlay"></div>
 
-<div id="cart-overlay" class="cart-overlay">
+<div class="drawer-content-wrapper">
+  <div id="search-overlay" class="drawer-content search-overlay">
+    <div class="search-overlay-content dflex-col gap-15 align-center">
+      <div class="search-overlay-content-header dflex-row align-center gap-15 justify-content-sb">
+        <form class="search-bar" action="/search" method="get" role="search">
+          <input id="search-input" type="search" name="q" placeholder="Search for..." aria-label="Search" autocomplete="off" />
+        </form>
+
+        <div class="dflex-row justify-content-sb gap-10 align-center">
+          <div class="clear-search">
+            <h4 id="clear-search" class="fw-regular">Clear</h4>
+          </div>
+          <div class="cart-close">
+            <span onclick="closeSearchOverlay()">{% render 'icon-close' %}</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="search-results" class="search-results dflex-col gap-10">
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="cart-content-wrapper">
-
-  <div id="cart-content" class="cart-content">
+<div class="drawer-content-wrapper">
+  <div id="drawer-content" class="drawer-content">
     <div id="cart-products" class="cart-products">
-
-      
-      
-      <div id="empty-cart" class="empty-cart" style="display: none;">
+      <div id="empty-cart" class="empty-cart" style="display: none">
         <div class="cart-close">
-          <span  onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
+          <span onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
         </div>
-        <div class="relative" style="width: fit-content;">
-          <span style="display: block; width: fit-content; position: relative;">{% render 'cart-svg' %}</span>
+        <div class="relative" style="width: fit-content">
+          <span style="display: block; width: fit-content; position: relative">{% render 'cart-svg' %}</span>
           <div class="header-cart-count">
-              <cart-count class="count-bubble">
-                  <h1>{{ cart.item_count }}</h1>
-              </cart-count>
+            <cart-count class="count-bubble">
+              <h1>{{ cart.item_count }}</h1>
+            </cart-count>
           </div>
         </div>
 
         <h2 class="fs-24 ff-secondary fw-regular">Your Cart is empty</h2>
 
         <a href="/products"><button class="btn-primary">Continue shopping</button></a>
-
       </div>
 
-
-      <div id="not-empty-cart" class="not-empty-cart" style="display: none;">
-        
-
+      <div id="not-empty-cart" class="not-empty-cart" style="display: none">
         <div>
           <div class="cartdrawer-header dflex-row justify-content-sb align-center">
             <div class="dflex-row gap-10 align-center">
               <h3 class="fs-24 ff-secondary">Cart</h3>
               <div class="header-cart-count">
                 <cart-count class="count-bubble">
-                    <h1>{{ cart.item_count }}</h1>
+                  <h1>{{ cart.item_count }}</h1>
                 </cart-count>
               </div>
             </div>
-  
-            <div class="cart-close">
-              <span class="dflex-row justify-content-center align-center"  onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
-            </div>
-  
-          </div>
-  
-          <div id="cart-items-container" class="cart-items-container"></div>
 
+            <div class="cart-close">
+              <span class="dflex-row justify-content-center align-center" onclick="closeCartOverlay()">{% render
+                'icon-close' %}</span>
+            </div>
+          </div>
+
+          <div id="cart-items-container" class="cart-items-container"></div>
         </div>
-        
+
         <div class="order-note-container">
-  
           <div class="order-note-container-inner dflex-col justify-content-sb gap-20">
             <h2 class="ff-secondary fs-24">Order Note</h2>
             <textarea name="order-note" id="order-note" cols="30" rows="3" placeholder="Order note"></textarea>
-            <button id="save-order-note" class="btn-secondary save-order-note fs-16">Save</button>
+            <button id="save-order-note" class="btn-secondary save-order-note fs-16">
+              Save
+            </button>
           </div>
         </div>
-        
+
         <div class="cartdrawer-bottom dflex-col gap-5 relative">
-          
           <div class="cartdrawer-total dflex-row justify-content-sb align-center ff-secondary fw-regular fs-24">
             <h2 class="fw-regular">Total</h2>
             <h3 id="cart-total" class="cart-total fw-regular">$73</h3>
           </div>
-          
-          <h5 class="fs-16 text-neutral-100-7 fw-regular">Taxes and shipping calculated at checkout</h5>
-          <h6 class="add-order-note underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">Add order note</h6>
-          
+
+          <h5 class="fs-16 text-neutral-100-7 fw-regular">
+            Taxes and shipping calculated at checkout
+          </h5>
+          <h6 class="add-order-note underline-animation-reverse fs-14 text-neutral-100-7 fw-regular">
+            Add order note
+          </h6>
+
           <div class="cartdrawer-cta dflex-row justify-content-sb gap-10">
             <a href="/cart"><button class="btn-secondary">View Cart</button></a>
-            <a href="/checkout"><button class="btn-primary dflex-row align-center justify-content-center gap-10"><span>{% render 'checkout-icon' %}</span>  Checkout</button></a>
+            <a href="/checkout"><button class="btn-primary dflex-row align-center justify-content-center gap-10">
+                <span>{% render 'checkout-icon' %}</span> Checkout
+              </button></a>
           </div>
-          
         </div>
       </div>
-      
-      
     </div>
   </div>
-
 </div>
+
+
 
 
 <!-- order note script visibility -->
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const addOrderNoteButton = document.querySelector(".add-order-note");
+    const orderNoteContainer = document.querySelector(".order-note-container");
+    const cartDrawerBottom = document.querySelector(".cartdrawer-bottom");
 
-document.addEventListener("DOMContentLoaded", function() {
-  const addOrderNoteButton = document.querySelector(".add-order-note");
-  const orderNoteContainer = document.querySelector(".order-note-container");
-  const cartDrawerBottom = document.querySelector(".cartdrawer-bottom");
+    function updateOrderNoteContainerPosition() {
+      const cartDrawerBottomHeight = cartDrawerBottom.offsetHeight;
+      orderNoteContainer.style.bottom = `${cartDrawerBottomHeight}px`;
+    }
 
-  function updateOrderNoteContainerPosition() {
-    const cartDrawerBottomHeight = cartDrawerBottom.offsetHeight;
-    orderNoteContainer.style.bottom = `${cartDrawerBottomHeight}px`;
-  }
+    if (addOrderNoteButton && orderNoteContainer && cartDrawerBottom) {
+      addOrderNoteButton.addEventListener("click", function () {
+        orderNoteContainer.classList.toggle("visible");
+        updateOrderNoteContainerPosition();
+      });
 
-  if (addOrderNoteButton && orderNoteContainer && cartDrawerBottom) {
-    addOrderNoteButton.addEventListener("click", function() {
-      orderNoteContainer.classList.toggle("visible");
+      // Initial position update
       updateOrderNoteContainerPosition();
-    });
 
-    // Initial position update
-    updateOrderNoteContainerPosition();
-
-    // Update position on window resize
-    window.addEventListener("resize", updateOrderNoteContainerPosition);
-  }
-});
-
+      // Update position on window resize
+      window.addEventListener("resize", updateOrderNoteContainerPosition);
+    }
+  });
 </script>
-
-
-
 
 <script>
   function showCartOverlay() {
     // Show the cart overlay
-    document.getElementById('cart-overlay').classList.remove('closing');
-    document.getElementById('cart-overlay').classList.add('visible');
-    document.getElementById('cart-content').classList.add('visible');
-    document.getElementById('cart-products').classList.add('visible');
+    document.getElementById("cart-overlay").classList.remove("closing");
+    document.getElementById("cart-overlay").classList.add("visible");
+    document.getElementById("drawer-content").classList.add("visible");
+    document.getElementById("cart-products").classList.add("visible");
   }
 
   function closeCartOverlay() {
     // Hide the cart overlay
-    document.getElementById('cart-products').classList.add('closing');
-    document.getElementById('cart-products').classList.remove('visible');
-    document.getElementById('cart-overlay').classList.remove('visible');
-    document.getElementById('cart-overlay').classList.add('closing');
-    document.getElementById('cart-content').classList.remove('visible');
+    document.getElementById("cart-products").classList.add("closing");
+    document.getElementById("cart-products").classList.remove("visible");
+    document.getElementById("cart-overlay").classList.remove("visible");
+    document.getElementById("cart-overlay").classList.add("closing");
+    document.getElementById("drawer-content").classList.remove("visible");
+  }
+
+  function showSearchOverlay() {
+    document.getElementById("search-overlay").classList.add("visible");
+    document.getElementById("cart-overlay").classList.remove("closing");
+    document.getElementById("cart-overlay").classList.add("visible");
+  }
+
+  function closeSearchOverlay() {
+    document.getElementById("search-overlay").classList.remove("visible");
+    document.getElementById("cart-overlay").classList.remove("visible");
+    document.getElementById("cart-overlay").classList.add("closing");
+    document.getElementById("drawer-content").classList.remove("visible");
   }
 </script>
-
-
-
-
-
-
-
 
 <script>
   // Function to close all open submenus
   function closeAllSubMenus() {
-    const visibleSubMenus = document.querySelectorAll('.sub-menu.visible');
-    visibleSubMenus.forEach(subMenu => {
-      subMenu.classList.remove('visible');
+    const visibleSubMenus = document.querySelectorAll(".sub-menu.visible");
+    visibleSubMenus.forEach((subMenu) => {
+      subMenu.classList.remove("visible");
     });
   }
 
   // Function to toggle submenu visibility
   function toggleSubMenu(menuItem) {
     // Find the submenu associated with the menu item
-    const subMenu = menuItem.querySelector('.sub-menu');
+    const subMenu = menuItem.querySelector(".sub-menu");
 
     // If the submenu is already visible, close it; otherwise, open it
-    if (subMenu.classList.contains('visible')) {
-      subMenu.classList.remove('visible');
+    if (subMenu.classList.contains("visible")) {
+      subMenu.classList.remove("visible");
     } else {
       // Close all open submenus first
       closeAllSubMenus();
       // Open the submenu associated with the clicked menu item
-      subMenu.classList.add('visible');
+      subMenu.classList.add("visible");
     }
   }
 
   // Get all menu items within the header-menu
-  const menuItems = document.querySelectorAll('.header-menu .menu-item');
+  const menuItems = document.querySelectorAll(".header-menu .menu-item");
 
   // Loop through each menu item
-  menuItems.forEach(menuItem => {
+  menuItems.forEach((menuItem) => {
     // Add click event listener to toggle submenu visibility
-    menuItem.addEventListener('click', function (event) {
+    menuItem.addEventListener("click", function (event) {
       // Toggle submenu visibility
       toggleSubMenu(this);
     });
   });
 
   // Add click event listener to document
-  document.addEventListener('click', function (event) {
+  document.addEventListener("click", function (event) {
     // Check if the clicked element is not within the header-menu or submenu
-    if (!event.target.closest('.header-menu') && !event.target.closest('.sub-menu')) {
+    if (
+      !event.target.closest(".header-menu") &&
+      !event.target.closest(".sub-menu")
+    ) {
       // Close all open submenus
       closeAllSubMenus();
     }
   });
 </script>
 
-
 <!-- cart count items change -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener("DOMContentLoaded", function () {
     // Get the cart count element
-    const cartCountElement = document.querySelector('.header-cart-count h1');
+    const cartCountElement = document.querySelector(".header-cart-count h1");
 
     // Get the item count from the element
     const itemCount = parseInt(cartCountElement.textContent);
 
     // Hide the bubble if the item count is 0
     if (itemCount === 0) {
-      cartCountElement.closest('.header-cart-count').style.display = 'none';
+      cartCountElement.closest(".header-cart-count").style.display = "none";
     }
   });
-
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Find the header section
-    const headerSection = document.querySelector('.header-section');
+    const headerSection = document.querySelector(".header-section");
 
     if (headerSection) {
-        // Find the parent container with the ID that starts with 'shopify-section-'
-        const parentContainer = headerSection.closest('[id^="shopify-section-"]');
+      // Find the parent container with the ID that starts with 'shopify-section-'
+      const parentContainer = headerSection.closest('[id^="shopify-section-"]');
 
-        if (parentContainer) {
-            // Apply the styles
-            parentContainer.style.position = 'sticky';
-            parentContainer.style.top = '0';
-            parentContainer.style.zIndex = '100';
-        }
+      if (parentContainer) {
+        // Apply the styles
+        parentContainer.style.position = "sticky";
+        parentContainer.style.top = "0";
+        parentContainer.style.zIndex = "100";
+      }
     }
-});
-
+  });
 </script>
