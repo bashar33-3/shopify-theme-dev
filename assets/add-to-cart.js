@@ -35,7 +35,7 @@ function calculateTotalPrice(items) {
 function toggleCartView(itemCount) {
   const emptyCartElement = document.getElementById("empty-cart");
   const notEmptyCartElement = document.getElementById("not-empty-cart");
-  const cartProductsElement = document.querySelector(".cart-products");
+  const cartProductsElement = document.querySelector(".drawer-inner-cart");
 
   console.log("Toggling cart view, item count:", itemCount);
 
@@ -45,7 +45,7 @@ function toggleCartView(itemCount) {
       element.style.display = "block";
     });
     if (emptyCartElement) emptyCartElement.style.display = "none";
-    if (notEmptyCartElement) notEmptyCartElement.style.display = "block";
+    if (notEmptyCartElement) notEmptyCartElement.style.display = "flex";
     if (cartProductsElement) {
       cartProductsElement.classList.remove("empty");
       cartProductsElement.classList.add("not-empty");

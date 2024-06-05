@@ -1,4 +1,8 @@
 <style>
+  .icon-cart,
+  .icon-search{
+    cursor: pointer;
+  }
   .cart-overlay {
     position: fixed;
     top: 0;
@@ -11,6 +15,8 @@
     width: 0;
     opacity: 0;
     transition: width 0s, opacity 0.2s ease;
+
+    cursor: url('{{ "cursor-close.svg" | asset_url }}'), auto;
   }
 
   .drawer-content {
@@ -48,16 +54,17 @@
     opacity: 1;
   }
 
-  .cart-products {
+  .drawer-inner {
     opacity: 0;
+    height: 100%;
   }
 
-  .cart-products.closing {
+  .drawer-inner.closing {
     opacity: 0;
     transition: opacity 0.1s ease;
   }
 
-  .cart-products.visible {
+  .drawer-inner.visible {
     opacity: 1;
     transition: opacity 0.3s 0.5s ease;
   }
@@ -66,7 +73,7 @@
     max-width: 648px;
   }
 
-  .cart-products.empty {
+  .drawer-inner.empty {
     padding: 20px;
     height: 100%;
     display: flex;
@@ -76,7 +83,7 @@
     text-align: center;
   }
 
-  .cart-products.not-empty {
+  .drawer-inner.not-empty {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -93,22 +100,22 @@
     right: 30px;
   }
 
-  .cart-products .icon-cart {
+  .drawer-inner .icon-cart {
     width: 48px;
     height: 48px;
   }
 
-  .cart-products .header-cart-count {
+  .drawer-inner .header-cart-count {
     left: 2em;
     top: -0.6em;
   }
 
-  .cart-products .count-bubble {
+  .drawer-inner .count-bubble {
     width: 28px;
     height: 28px;
   }
 
-  .cart-products .empty-cart button {
+  .drawer-inner .empty-cart button {
     padding: 17.2px 40px;
     font-size: var(--fs-200);
   }
@@ -123,7 +130,6 @@
 
   .not-empty-cart {
     height: 100%;
-    display: flex !important;
     flex-direction: column;
     justify-content: space-between;
   }
@@ -356,7 +362,7 @@
     flex-direction: column-reverse;
   }
 
-  .search-result-title{
+  .search-result-title {
     gap: 1.25rem;
   }
 
@@ -410,22 +416,104 @@
   }
 
   .search-result-title h4.active {
-    opacity: 1; 
-}
+    opacity: 1;
+  }
 
-  .no-results{
+  .no-results {
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .loading-indicator {
+    display: none;
+    align-self: flex-start;
+  }
+  
+  .loading-indicator.visible {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .loading-titles > div {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    max-width: 150px;
+    height: 32px;
+    width: 100%;
+  }
+  
+  .loading-image{
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .loading-info{
+    width: 75%;
+  }
+  
+  .loading-info >div{
+    background-color: rgba(255, 255, 255, 0.1);
+    padding-block: 6px;
+    border-radius: 5px;
+  }
+
+  .loading-info1{
+    width: 40%;
+  }
+  .loading-info2{
+    width: 100%;
+  }
+  .loading-info3{
+    width: 60%;
+  }
+
+  .header-mobile-icons{
+    display: none;
+  }
+
+  .hamburger-menu{
+    cursor: pointer;
+  }
+
+  @media (max-width:1150px){
+    .header-section {
+      padding: 24px 48px;
+    }
+
+    .header-mobile-icons{
+      display: flex;
+    }
+    .mobile-search-icon{
+      display: none;
+    }
+    
+  }
+  
+  
   @media (max-width: 700px) {
+    .desktop-search-icon{
+      display: none;
+    }
+    
+    .header-section{
+      padding: 12px 20px;
+    }
+    .mobile-search-icon{
+      display: block;
+    }
+    
+    .header-logo{
+      width: 128px;
+    }
+    
     .drawer-content {
       transition: max-width 0.4s linear;
     }
 
-    .cart-products .icon-cart {
+    .drawer-inner .icon-cart {
       width: 32px;
       height: 32px;
     }
@@ -495,10 +583,33 @@
     .order-note-container-inner {
       padding: 20px;
     }
+
+    .search-overlay-content{
+      padding: 20px;
+    }
+
   }
+  
+  .cart-overlay.visible body{
+    overflow: hidden;
+  }
+
+  .no-scroll {
+  overflow: hidden;
+}
 </style>
 
 <header class="header-section align-center pad-x">
+
+  <div class="header-mobile-icons dflex-row gap-15 align-center">
+    <div class="hamburger-menu">
+      <span>{% render 'hamburger-menu' %}</span>
+    </div>
+
+    <span class="mobile-search-icon" onclick="showSearchOverlay()"> {% render 'search-svg' %} </span>
+
+  </div>
+
   <div class="header-logo-wrapper">
     <a href="/">
       <img class="header-logo" src="{{ settings.logo_image | img_url : 'medium' }}" alt="Petriotics Logo" />
@@ -529,7 +640,7 @@
 
   <div class="text-neutral-100 dflex-row gap-24">
     <div class="price-picker custom-select dflex-row align-center gap-10">
-      <div data-value="USD" class="dflex-row align-center justify-content-center gap-10 fw-bold fs-14">
+      <div data-value="USD" class="dflex-row align-center justify-content-center gap-10 fw-bold fs-14 no-wrap">
         <span class="country-flags country-flag-LB"></span> USD $
       </div>
       <span class="chevron" onclick="toggleSubMenu(this)">
@@ -537,7 +648,7 @@
       </span>
     </div>
 
-    <span onclick="showSearchOverlay()"> {% render 'search-svg' %} </span>
+    <span class="desktop-search-icon" onclick="showSearchOverlay()"> {% render 'search-svg' %} </span>
 
     <div class="relative" onclick="showCartOverlay()">
       <span>{% render 'cart-svg' %}</span>
@@ -550,14 +661,15 @@
   </div>
 </header>
 
-<div id="cart-overlay" class="cart-overlay"></div>
+<div id="cart-overlay" class="cart-overlay" onclick="closeSearchOverlay(); closeCartOverlay();"></div>
 
 <div class="drawer-content-wrapper">
   <div id="search-overlay" class="drawer-content search-overlay">
-    <div class="search-overlay-content dflex-col gap-15 align-center">
+    <div id="search-overlay-content" class="drawer-inner search-overlay-content dflex-col gap-20 align-center">
       <div class="search-overlay-content-header dflex-row align-center gap-15 justify-content-sb">
         <form class="search-bar" action="/search" method="get" role="search">
-          <input id="search-input" type="search" name="q" placeholder="Search for..." aria-label="Search" autocomplete="off" />
+          <input id="search-input" type="search" name="q" placeholder="Search for..." aria-label="Search"
+            autocomplete="off" />
         </form>
 
         <div class="dflex-row justify-content-sb gap-10 align-center">
@@ -572,13 +684,68 @@
 
       <div id="search-results" class="search-results dflex-col gap-10">
       </div>
+      <div id="loading-indicator" class="loading-indicator gap-20">
+        <div class="loading-titles dflex-row gap-15">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <div class="dflex-col gap-15">
+
+          <div class="dflex-row gap-15 align-center justify-content-sb">
+            <div class="cart-item-image loading-image"></div>
+
+            <div class="loading-info dflex-col justify-content-sa gap-10">
+              <div class="loading-info1"></div>
+              <div class="loading-info2"></div>
+              <div class="loading-info3"></div>
+            </div>
+
+          </div>
+          <div class="dflex-row gap-15 align-center justify-content-sb">
+            <div class="cart-item-image loading-image"></div>
+
+            <div class="loading-info dflex-col justify-content-sa gap-10">
+              <div class="loading-info1"></div>
+              <div class="loading-info2"></div>
+              <div class="loading-info3"></div>
+            </div>
+
+          </div>
+          <div class="dflex-row gap-15 align-center justify-content-sb">
+            <div class="cart-item-image loading-image"></div>
+
+            <div class="loading-info dflex-col justify-content-sa gap-10">
+              <div class="loading-info1"></div>
+              <div class="loading-info2"></div>
+              <div class="loading-info3"></div>
+            </div>
+
+          </div>
+          <div class="dflex-row gap-15 align-center justify-content-sb">
+            <div class="cart-item-image loading-image"></div>
+
+            <div class="loading-info dflex-col justify-content-sa gap-10">
+              <div class="loading-info1"></div>
+              <div class="loading-info2"></div>
+              <div class="loading-info3"></div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
 
 <div class="drawer-content-wrapper">
   <div id="drawer-content" class="drawer-content">
-    <div id="cart-products" class="cart-products">
+    <div id="drawer-inner" class="drawer-inner drawer-inner-cart">
       <div id="empty-cart" class="empty-cart" style="display: none">
         <div class="cart-close">
           <span onclick="closeCartOverlay()">{% render 'icon-close' %}</span>
@@ -690,29 +857,36 @@
     document.getElementById("cart-overlay").classList.remove("closing");
     document.getElementById("cart-overlay").classList.add("visible");
     document.getElementById("drawer-content").classList.add("visible");
-    document.getElementById("cart-products").classList.add("visible");
+    document.getElementById("drawer-inner").classList.add("visible");
+    document.body.classList.add("no-scroll");
   }
-
+  
   function closeCartOverlay() {
     // Hide the cart overlay
-    document.getElementById("cart-products").classList.add("closing");
-    document.getElementById("cart-products").classList.remove("visible");
+    document.getElementById("drawer-inner").classList.add("closing");
+    document.getElementById("drawer-inner").classList.remove("visible");
     document.getElementById("cart-overlay").classList.remove("visible");
     document.getElementById("cart-overlay").classList.add("closing");
     document.getElementById("drawer-content").classList.remove("visible");
+    document.body.classList.remove("no-scroll");
   }
-
+  
   function showSearchOverlay() {
     document.getElementById("search-overlay").classList.add("visible");
     document.getElementById("cart-overlay").classList.remove("closing");
     document.getElementById("cart-overlay").classList.add("visible");
+    document.getElementById("search-overlay-content").classList.add("visible");
+    document.body.classList.add("no-scroll");
   }
-
+  
   function closeSearchOverlay() {
+    document.getElementById("search-overlay-content").classList.add("closing");
+    document.getElementById("search-overlay-content").classList.remove("visible");
     document.getElementById("search-overlay").classList.remove("visible");
     document.getElementById("cart-overlay").classList.remove("visible");
     document.getElementById("cart-overlay").classList.add("closing");
     document.getElementById("drawer-content").classList.remove("visible");
+    document.body.classList.remove("no-scroll");
   }
 </script>
 

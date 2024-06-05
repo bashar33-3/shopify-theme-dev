@@ -2,11 +2,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search-input");
   const searchResultsContainer = document.getElementById("search-results");
   const clearButton = document.getElementById("clear-search");
+  const loadingIndicator = document.getElementById("loading-indicator");
 
   searchInput.addEventListener("input", function () {
     const query = searchInput.value.trim();
 
     if (query.length > 0) {
+      // Clear previous search results and show loading indicator
+      searchResultsContainer.classList.remove("visible");
+      searchResultsContainer.innerHTML = "";
+      showLoadingIndicator();
+
+      // Fetch new search results
       fetchPredictiveSearchResults(query);
     } else {
       searchResultsContainer.classList.remove("visible");
@@ -21,16 +28,28 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.focus(); // Optional: keep the input focused after clearing
   });
 
+  function showLoadingIndicator() {
+    loadingIndicator.classList.add("visible");
+  }
+
+  function hideLoadingIndicator() {
+    loadingIndicator.classList.remove("visible");
+  }
+
   function fetchPredictiveSearchResults(query) {
     fetch(
       `/search/suggest.json?q=${query}&resources[type]=product,collection,article,page&resources[limit]=20`
     ) // Increase the limit as needed
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        displaySearchResults(data.resources.results);
+        // Delay slightly to simulate loading if needed
+        setTimeout(() => {
+          hideLoadingIndicator();
+          displaySearchResults(data.resources.results);
+        }, 20);
       })
       .catch((error) => {
+        hideLoadingIndicator();
         console.error("Error fetching search results:", error);
       });
   }
@@ -157,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return { title, items: itemsContainer };
   }
+
   function addToggleFunctionality() {
     const sections = document.querySelectorAll(".search-result-title h4");
 
