@@ -617,25 +617,27 @@
   </div>
 
   <ul role="list" class="header-menu dflex-row fw-bold flex-wrap justify-content-center">
-    {% for link in linklists.main-menu.links -%}
-    <li class="menu-item">
-      <div class="dflex-row justify-content-sb gap-10 align-center">
-        {{ link.title | link_to : link.url }}
-        {% if link.title == 'Fitness & Weight Lifting' or link.title == 'Yoga
-        Essentials' or link.title == 'Mats' %}
-        <span class="chevron" onclick="toggleSubMenu(this)">
-          {% render 'chevron-down-svg' %}
-        </span>
-      </div>
-      <ul class="sub-menu fs-16 fw-regular">
-        <div class="sub-menu-dropdown">
-          {% for childlink in link.links %}
-          <li>{{ childlink.title | link_to : childlink.url }}</li>
-          {% endfor %}
+    {% for link in linklists.main-menu.links %}
+      <li class="menu-item">
+        <div class="dflex-row justify-content-sb gap-10 align-center">
+          {{ link.title | link_to : link.url }}
+          {% if link.links.size > 0 %}
+            <span class="chevron" onclick="toggleSubMenu(this)">
+              {% render 'chevron-down-svg' %}
+            </span>
         </div>
-      </ul>
-    </li>
-    {% endif %} {%- endfor %}
+        <ul class="sub-menu fs-16 fw-regular">
+          <div class="sub-menu-dropdown">
+            {% for childlink in link.links %}
+              <li>{{ childlink.title | link_to : childlink.url }}</li>
+            {% endfor %}
+          </div>
+        </ul>
+          {% else %}
+        </div>
+          {% endif %}
+      </li>
+    {% endfor %}
   </ul>
 
   <div class="text-neutral-100 dflex-row gap-24">
@@ -973,4 +975,16 @@
       }
     }
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const menuLinks = document.querySelectorAll('.header-menu a[href="#"]');
+  
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default action
+    });
+  });
+});
 </script>

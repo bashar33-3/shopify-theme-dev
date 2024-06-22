@@ -302,6 +302,7 @@ h6 {
   text-wrap: nowrap;
 }
 
+
 .a-reset {
   color: unset;
 }
@@ -463,13 +464,13 @@ header div {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 0;
-  transition: max-height 0.15s linear;
+  transition: visibility .15s linear;
   padding: 20px 28px;
+  visibility: hidden;
 }
 
 .sub-menu.visible .sub-menu-dropdown {
-  max-height: 500px;
+  visibility: visible;
 }
 
 .sub-menu li {
